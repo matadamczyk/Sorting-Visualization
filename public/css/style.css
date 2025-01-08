@@ -26,3 +26,11 @@ canvas {
   display: block;
   margin: 20px auto;
 }
+
+main {
+  padding: 20px;
+}
+
+h2 {
+  color: #333;
+}
