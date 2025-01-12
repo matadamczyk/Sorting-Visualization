@@ -1,15 +1,16 @@
 import {
   bubbleSort,
   generateRandomArray,
+  insertionSort,
   mergeSort,
   quickSort,
+  selectionSort,
 } from "./algorithms.js";
 
-export const startVisualization = (algorithm, arraySize) => {
+export const startVisualization = (algorithm, array) => {
   const canvas = document.getElementById("visualizationCanvas");
   const ctx = canvas.getContext("2d");
 
-  const array = generateRandomArray(arraySize);
   switch (algorithm) {
     case "Bubble Sort":
       bubbleSort(array, ctx);
@@ -19,6 +20,12 @@ export const startVisualization = (algorithm, arraySize) => {
       break;
     case "Merge Sort":
       mergeSort(array, ctx);
+      break;
+    case "Insertion Sort":
+      insertionSort(array, ctx);
+      break;
+    case "Selection Sort":
+      selectionSort(array, ctx);
       break;
     default:
       console.log("Unknown algorithm");

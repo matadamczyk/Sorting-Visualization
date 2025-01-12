@@ -1,15 +1,21 @@
 import apiRoutes from "./routes/api.js";
 import authRoutes from "./routes/auth.js";
 import bodyParser from "body-parser";
+import connectDB from "./database.js";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import helmet from "helmet";
-import mongoose from "mongoose";
 
 dotenv.config();
 
+if (!process.env.JWT_SECRET) {
+  throw new Error("JWT_SECRET is not defined in environment variables");
+}
+
 const app = express();
+
+connectDB();
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -38,6 +44,10 @@ app.use((req, res, next) => {
 app.use("/public", express.static("public", { extensions: ['js'] }));
 app.use("/views", express.static("views"));
 
+app.get("/sortingWorker.js", (req, res) => {
+  res.sendFile("sortingWorker.js", { root: "public/js" });
+});
+
 app.get("/", (req, res) => {
   res.sendFile("index.html", { root: "views" });
 });
@@ -49,14 +59,6 @@ app.get("/profile", (req, res) => {
 app.get("/about", (req, res) => {
   res.sendFile("about.html", { root: "views" });
 });
-
-// mongoose
-//   .connect(process.env.MONGO_URI, {
-//     userNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => console.log("Connected with MongoDB"))
-//   .catch((err) => console.error("MongoDB connection error:", err));
 
 app.use("/auth", authRoutes);
 app.use("/api", apiRoutes);

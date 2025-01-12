@@ -13,6 +13,37 @@ export const bubbleSort = async (array, ctx) => {
       }
     }
   }
+  return array;
+};
+
+export const insertionSort = async (array, ctx) => {
+  for (let i = 1; i < array.length; i++) {
+    let key = array[i];
+    let j = i - 1;
+    while (j >= 0 && array[j] > key) {
+      array[j + 1] = array[j];
+      j = j - 1;
+      await visualizeArray(array, ctx, j + 1);
+    }
+    array[j + 1] = key;
+    await visualizeArray(array, ctx, j + 1);
+  }
+  return array;
+};
+
+export const selectionSort = async (array, ctx) => {
+  for (let i = 0; i < array.length - 1; i++) {
+    let minIndex = i;
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[j] < array[minIndex]) {
+        minIndex = j;
+      }
+      await visualizeArray(array, ctx, j, -1, i, minIndex);
+    }
+    [array[i], array[minIndex]] = [array[minIndex], array[i]];
+    await visualizeArray(array, ctx, i, -1, i, minIndex);
+  }
+  return array;
 };
 
 export const quickSort = async (
@@ -26,6 +57,7 @@ export const quickSort = async (
     await quickSort(array, ctx, left, pivotIndex - 1);
     await quickSort(array, ctx, pivotIndex + 1, right);
   }
+  return array;
 };
 
 const partition = async (array, ctx, left, right) => {
@@ -55,6 +87,7 @@ export const mergeSort = async (
     await mergeSort(array, ctx, middle + 1, right);
     await merge(array, ctx, left, middle, right);
   }
+  return array;
 };
 
 const merge = async (array, ctx, left, middle, right) => {
@@ -90,3 +123,4 @@ const merge = async (array, ctx, left, middle, right) => {
     await visualizeArray(array, ctx, k);
   }
 };
+

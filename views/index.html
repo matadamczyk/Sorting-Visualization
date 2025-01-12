@@ -5,19 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sorting Visualizer</title>
     <link rel="stylesheet" href="../public/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- <link rel="icon" href="../public/assets/favicon.ico" /> -->
   </head>
   <body>
-    <header>
+    <nav class="navbar">
       <h1>Sorting Visualizer</h1>
-    </header>
-    <nav>
-      <a href="/about">About</a>
-      <a href="/profile">User profile</a>
+      <div class="links">
+        <a href="/about">About</a>
+        <a href="/profile" id="profile" style="display: none;">User profile</a>
+      </div>
+      <div class="sign">
+        <button id="signInButton">Sign in</button>
+        <button id="signUpButton">Sign up</button>
+        <button id="logoutButton" style="display: none;">Logout</button>
+      </div>
     </nav>
-    <main>
+    <main id="welcomePage">
+      <h2>Welcome to Sorting Visualizer</h2>
+      <p>Please sign in to use the application.</p>
+    </main>
+    <main id="appPage" style="display: none;">
       <h2>Choose the algorithm:</h2>
       <button id="bubbleSort">Bubble Sort</button>
+      <button id="insertionSort">Insertion Sort</button>
+      <button id="selectionSort">Selection Sort</button>
       <button id="quickSort">Quick Sort</button>
       <button id="mergeSort">Merge Sort</button>
       <h2>Choose the size of array</h2>
@@ -27,6 +39,45 @@
       <button id="startVisualization">Start Visualization</button>
       <canvas id="visualizationCanvas" width="600" height="200"></canvas>
     </main>
+    <dialog id="signInDialog">
+      <form method="dialog">
+        <h2>Sign In</h2>
+        <label for="signInUsername">Username:</label>
+        <input type="text" id="signInUsername" name="username" required>
+        <label for="signInPassword">Password:</label>
+        <input type="password" id="signInPassword" name="password" required>
+        <button type="submit">Sign In</button>
+        <button type="button" id="closeSignInDialog">Cancel</button>
+      </form>
+    </dialog>
+    <dialog id="signUpDialog">
+      <form method="dialog">
+        <h2>Sign Up</h2>
+        <label for="signUpUsername">Username:</label>
+        <input type="text" id="signUpUsername" name="username" required>
+        <label for="signUpPassword">Password:</label>
+        <input type="password" id="signUpPassword" name="password" required>
+        <button type="submit">Sign Up</button>
+        <button type="button" id="closeSignUpDialog">Cancel</button>
+      </form>
+    </dialog>
+    <footer>
+      <div class="info">
+        <p>&copy; 2025 Sorting Visualization. All rights reserved.</p>
+        <nav>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="repo">
+        <a href="http://github.com/matadamczyk/Sorting-Visualization"
+          >Github repository <i class="fa fa-github"></i
+        ></a>
+      </div>
+    </footer>
     <script type="module" src="../public/js/app.js"></script>
   </body>
 </html>
