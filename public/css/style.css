@@ -22,9 +22,10 @@ button {
 }
 
 canvas {
-  border: 1px solid black;
-  display: block;
+  border-bottom: 2px solid black;
+  display: flex;
   margin: 20px auto;
+  padding: 5px;
 }
 
 main {

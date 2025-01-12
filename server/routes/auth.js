@@ -1,7 +1,7 @@
-import express from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import User from "../models/user.js";
+import bcrypt from "bcrypt";
+import express from "express";
+import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
@@ -34,4 +34,4 @@ router.post("/login", async (req, res) => {
   }
 });
 
-export default router
+export default router;

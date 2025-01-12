@@ -1,12 +1,11 @@
-import express from "express";
-import mongoose from "mongoose";
-import cors from "cors";
-import bodyParser from "body-parser";
-import dotenv from "dotenv";
-import helmet from "helmet";
-
-import authRoutes from "./routes/auth.js";
 import apiRoutes from "./routes/api.js";
+import authRoutes from "./routes/auth.js";
+import bodyParser from "body-parser";
+import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
+import helmet from "helmet";
+import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -18,37 +17,51 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(helmet());
 
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       defaultSrc: ["'self'", "http://localhost:8080"],
-//       scriptSrc: ["'self'", "'unsafe-inline'"],
-//       styleSrc: ["'self'", "'unsafe-inline'"],
-//       imgSrc: ["'self'", "data:", "http://localhost:8080"],
-//       connectSrc: ["'self'"],
-//       fontSrc: ["'self'", "https:", "data:"],
-//       objectSrc: ["'none'"],
-//       mediaSrc: ["'self'"],
-//       frameSrc: ["'none'"],
-//     },
-//   })
-// );
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:"],
+    },
+  })
+);
 
-app.use("/public", express.static("public"));
+app.use((req, res, next) => {
+  if (req.url.endsWith('.js')) {
+    res.setHeader('Content-Type', 'application/javascript');
+  }
+  next();
+});
+
+app.use("/public", express.static("public", { extensions: ['js'] }));
 app.use("/views", express.static("views"));
 
-mongoose
-  .connect(process.env.MONGO_URI, {
-    userNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Connected with MongoDB"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+app.get("/", (req, res) => {
+  res.sendFile("index.html", { root: "views" });
+});
+
+app.get("/profile", (req, res) => {
+  res.sendFile("profile.html", { root: "views" });
+});
+
+app.get("/about", (req, res) => {
+  res.sendFile("about.html", { root: "views" });
+});
+
+// mongoose
+//   .connect(process.env.MONGO_URI, {
+//     userNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => console.log("Connected with MongoDB"))
+//   .catch((err) => console.error("MongoDB connection error:", err));
 
 app.use("/auth", authRoutes);
 app.use("/api", apiRoutes);
 
-const PORT = process.env.PORT || 3012;
+const PORT = process.env.PORT || 3069;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
