@@ -38,7 +38,14 @@ export const visualizeArray = async (array, ctx, movingIndex = -1) => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       const barWidth = ctx.canvas.width / array.length;
       array.forEach((value, index) => {
-        ctx.fillStyle = index === movingIndex ? "red" : "blue";
+        ctx.fillStyle = index === movingIndex ? "#65d9ff" : "#dfe1e2";
+        if (index === movingIndex) {
+          ctx.shadowColor = "#65d9ff";
+          ctx.shadowBlur = 10;
+        } else {
+          ctx.shadowColor = "transparent";
+          ctx.shadowBlur = 0;
+        }
         ctx.fillRect(index * barWidth, ctx.canvas.height - value, barWidth - 5, value);
       });
       resolve();
@@ -52,7 +59,7 @@ export const showStartingArray = (array) => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   const barWidth = ctx.canvas.width / array.length;
   array.forEach((value, index) => {
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "#dfe1e2";
     ctx.fillRect(index * barWidth, ctx.canvas.height - value, barWidth - 5, value);
   });
 };

@@ -5,7 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sorting Visualizer</title>
     <link rel="stylesheet" href="../public/css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Teko:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
     <!-- <link rel="icon" href="../public/assets/favicon.ico" /> -->
   </head>
   <body>
@@ -13,57 +22,79 @@
       <h1>Sorting Visualizer</h1>
       <div class="links">
         <a href="/about">About</a>
-        <a href="/profile" id="profile" style="display: none;">User profile</a>
+        <a href="/profile" id="profile" style="display: none">User profile</a>
       </div>
       <div class="sign">
         <button id="signInButton">Sign in</button>
         <button id="signUpButton">Sign up</button>
-        <button id="logoutButton" style="display: none;">Logout</button>
+        <button id="logoutButton" style="display: none">Logout</button>
       </div>
     </nav>
-    <main id="welcomePage">
-      <h2>Welcome to Sorting Visualizer</h2>
-      <p>Please sign in to use the application.</p>
+    <main id="welcomePage" class="animated-text">
+      <h2>
+        <span>W</span><span>e</span><span>l</span><span>c</span><span>o</span
+        ><span>m</span><span>e</span> <span>t</span><span>o</span> <span>S</span
+        ><span>o</span><span>r</span><span>t</span><span>i</span><span>n</span
+        ><span>g</span> <span>V</span><span>i</span><span>s</span><span>u</span
+        ><span>a</span><span>l</span><span>i</span><span>z</span><span>e</span
+        ><span>r</span>
+      </h2>
+      <p>
+        <span>P</span><span>l</span><span>e</span><span>a</span><span>s</span
+        ><span>e</span> <span>s</span><span>i</span><span>g</span
+        ><span>n</span> <span>i</span><span>n</span> <span>t</span
+        ><span>o</span> <span>u</span><span>s</span><span>e</span> <span>t</span
+        ><span>h</span><span>e</span> <span>a</span><span>p</span><span>p</span
+        ><span>l</span><span>i</span><span>c</span><span>a</span><span>t</span
+        ><span>i</span><span>o</span><span>n</span><span>.</span>
+      </p>
     </main>
-    <main id="appPage" style="display: none;">
-      <h2>Choose the algorithm:</h2>
-      <button id="bubbleSort">Bubble Sort</button>
-      <button id="insertionSort">Insertion Sort</button>
-      <button id="selectionSort">Selection Sort</button>
-      <button id="quickSort">Quick Sort</button>
-      <button id="mergeSort">Merge Sort</button>
-      <h2>Choose the size of array</h2>
-      <input type="range" id="arraySize" min="1" max="20" value="10" />
-      <span id="arraySizeValue">10</span>
-      <button id="showArray">Show Starting Array</button>
-      <button id="startVisualization">Start Visualization</button>
+    <main id="appPage" style="display: none">
+      <h2 class="step">Choose the algorithm:</h2>
+      <button class="choose" id="bubbleSort">Bubble Sort</button>
+      <button class="choose" id="insertionSort">Insertion Sort</button>
+      <button class="choose" id="selectionSort">Selection Sort</button>
+      <button class="choose" id="quickSort">Quick Sort</button>
+      <button class="choose" id="mergeSort">Merge Sort</button>
+      <h2 class="step">Choose the size of array:</h2>
+      <div class="input-bar">
+        <input type="range" id="arraySize" min="1" max="20" value="10" />
+        <span id="arraySizeValue">10</span>
+      </div>
+      <button class="choose" id="showArray">Show Starting Array</button>
+      <button class="choose" id="startVisualization">
+        Start Visualization
+      </button>
       <canvas id="visualizationCanvas" width="600" height="200"></canvas>
+      <div class="lightbar"></div>
     </main>
     <dialog id="signInDialog">
       <form method="dialog">
-        <h2>Sign In</h2>
+        <h3>Sign In</h3>
         <label for="signInUsername">Username:</label>
-        <input type="text" id="signInUsername" name="username" required>
+        <input type="text" id="signInUsername" name="username" required />
         <label for="signInPassword">Password:</label>
-        <input type="password" id="signInPassword" name="password" required>
+        <input type="password" id="signInPassword" name="password" required />
         <button type="submit">Sign In</button>
         <button type="button" id="closeSignInDialog">Cancel</button>
       </form>
     </dialog>
     <dialog id="signUpDialog">
       <form method="dialog">
-        <h2>Sign Up</h2>
+        <h3>Sign Up</h3>
         <label for="signUpUsername">Username:</label>
-        <input type="text" id="signUpUsername" name="username" required>
+        <input type="text" id="signUpUsername" name="username" required />
         <label for="signUpPassword">Password:</label>
-        <input type="password" id="signUpPassword" name="password" required>
+        <input type="password" id="signUpPassword" name="password" required />
         <button type="submit">Sign Up</button>
         <button type="button" id="closeSignUpDialog">Cancel</button>
       </form>
     </dialog>
     <footer>
       <div class="info">
-        <p>&copy; 2025 Sorting Visualization. All rights reserved.</p>
+        <p class="copy-rights">
+          &copy; 2025 Sorting Visualization. All rights reserved.
+        </p>
         <nav>
           <ul>
             <li><a href="#">Privacy Policy</a></li>
@@ -73,7 +104,9 @@
         </nav>
       </div>
       <div class="repo">
-        <a href="http://github.com/matadamczyk/Sorting-Visualization"
+        <a
+          class="github"
+          href="http://github.com/matadamczyk/Sorting-Visualization"
           >Github repository <i class="fa fa-github"></i
         ></a>
       </div>

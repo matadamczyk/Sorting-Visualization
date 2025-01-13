@@ -11,22 +11,27 @@ let array = [];
 
 document.getElementById("bubbleSort").addEventListener("click", () => {
   selectedAlgorithm = "Bubble Sort";
+  document.getElementById("bubbleSort").classList.add("active");
 });
 
 document.getElementById("quickSort").addEventListener("click", () => {
   selectedAlgorithm = "Quick Sort";
+  document.getElementById("quickSort").classList.add("active");
 });
 
 document.getElementById("mergeSort").addEventListener("click", () => {
   selectedAlgorithm = "Merge Sort";
+  document.getElementById("mergeSort").classList.add("active");
 });
 
 document.getElementById("insertionSort").addEventListener("click", () => {
   selectedAlgorithm = "Insertion Sort";
+  document.getElementById("insertionSort").classList.add("active");
 });
 
 document.getElementById("selectionSort").addEventListener("click", () => {
   selectedAlgorithm = "Selection Sort";
+  document.getElementById("selectionSort").classList.add("active");
 });
 
 document.getElementById("arraySize").addEventListener("input", (event) => {
@@ -76,6 +81,13 @@ if (token) {
 document.getElementById("logoutButton").addEventListener("click", () => {
   localStorage.removeItem("token");
   location.reload();
+});
+
+document.querySelectorAll('#appPage button').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('#appPage button').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+  });
 });
 
 document.getElementById("signInDialog").querySelector("form").addEventListener("submit", async (event) => {
