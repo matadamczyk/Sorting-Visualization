@@ -45,10 +45,6 @@ app.use((req, res, next) => {
 app.use("/public", express.static("public", { extensions: ['js'] }));
 app.use("/views", express.static("views"));
 
-app.get("/sortingWorker.js", (req, res) => {
-  res.sendFile("sortingWorker.js", { root: "public/js" });
-});
-
 app.get("/", (req, res) => {
   res.sendFile("index.html", { root: "views" });
 });
