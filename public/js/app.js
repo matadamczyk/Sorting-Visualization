@@ -9,62 +9,78 @@ let selectedAlgorithm = null;
 let arraySize = 10;
 let array = [];
 
-document.getElementById("bubbleSort").addEventListener("click", () => {
+document.getElementById("bubbleSort")?.addEventListener("click", () => {
   selectedAlgorithm = "Bubble Sort";
   document.getElementById("bubbleSort").classList.add("active");
 });
 
-document.getElementById("quickSort").addEventListener("click", () => {
+document.getElementById("quickSort")?.addEventListener("click", () => {
   selectedAlgorithm = "Quick Sort";
   document.getElementById("quickSort").classList.add("active");
 });
 
-document.getElementById("mergeSort").addEventListener("click", () => {
+document.getElementById("mergeSort")?.addEventListener("click", () => {
   selectedAlgorithm = "Merge Sort";
   document.getElementById("mergeSort").classList.add("active");
 });
 
-document.getElementById("insertionSort").addEventListener("click", () => {
+document.getElementById("insertionSort")?.addEventListener("click", () => {
   selectedAlgorithm = "Insertion Sort";
   document.getElementById("insertionSort").classList.add("active");
 });
 
-document.getElementById("selectionSort").addEventListener("click", () => {
+document.getElementById("selectionSort")?.addEventListener("click", () => {
   selectedAlgorithm = "Selection Sort";
   document.getElementById("selectionSort").classList.add("active");
 });
 
-document.getElementById("arraySize").addEventListener("input", (event) => {
+document.getElementById("arraySize")?.addEventListener("input", (event) => {
   arraySize = event.target.value;
   document.getElementById("arraySizeValue").textContent = arraySize;
 });
 
-document.getElementById("showArray").addEventListener("click", () => {
+document.getElementById("showArray")?.addEventListener("click", () => {
   array = generateRandomArray(arraySize);
   showStartingArray(array);
 });
 
-document.getElementById("startVisualization").addEventListener("click", () => {
+document.getElementById("startVisualization")?.addEventListener("click", async () => {
   if (selectedAlgorithm) {
     startVisualization(selectedAlgorithm, array);
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch("/api/save-visualization", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ algorithm: selectedAlgorithm, date: new Date() }),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to save visualization history");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   } else {
     alert("Please select an algorithm first.");
   }
 });
 
-document.getElementById("signInButton").addEventListener("click", () => {
+document.getElementById("signInButton")?.addEventListener("click", () => {
   document.getElementById("signInDialog").showModal();
 });
 
-document.getElementById("signUpButton").addEventListener("click", () => {
+document.getElementById("signUpButton")?.addEventListener("click", () => {
   document.getElementById("signUpDialog").showModal();
 });
 
-document.getElementById("closeSignInDialog").addEventListener("click", () => {
+document.getElementById("closeSignInDialog")?.addEventListener("click", () => {
   document.getElementById("signInDialog").close();
 });
 
-document.getElementById("closeSignUpDialog").addEventListener("click", () => {
+document.getElementById("closeSignUpDialog")?.addEventListener("click", () => {
   document.getElementById("signUpDialog").close();
 });
 
@@ -78,9 +94,9 @@ if (token) {
   document.getElementById("logoutButton").style.display = "block";
 }
 
-document.getElementById("logoutButton").addEventListener("click", () => {
+document.getElementById("logoutButton")?.addEventListener("click", () => {
   localStorage.removeItem("token");
-  location.reload();
+  location.href = "/";
 });
 
 document.querySelectorAll('#appPage button').forEach(button => {
@@ -90,7 +106,7 @@ document.querySelectorAll('#appPage button').forEach(button => {
   });
 });
 
-document.getElementById("signInDialog").querySelector("form").addEventListener("submit", async (event) => {
+document.getElementById("signInDialog")?.querySelector("form")?.addEventListener("submit", async (event) => {
   event.preventDefault();
   const username = document.getElementById("signInUsername").value;
   const password = document.getElementById("signInPassword").value;
@@ -114,7 +130,7 @@ document.getElementById("signInDialog").querySelector("form").addEventListener("
   }
 });
 
-document.getElementById("signUpDialog").querySelector("form").addEventListener("submit", async (event) => {
+document.getElementById("signUpDialog")?.querySelector("form")?.addEventListener("submit", async (event) => {
   event.preventDefault();
   const username = document.getElementById("signUpUsername").value;
   const password = document.getElementById("signUpPassword").value;
@@ -136,4 +152,38 @@ document.getElementById("signUpDialog").querySelector("form").addEventListener("
   } catch (error) {
     alert("An error occurred during registration.");
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  async function fetchHistory() {
+    const token = localStorage.getItem("token");
+    console.log("Token:", token); // Add this line to log the token
+    try {
+      const response = await fetch("/api/visualization-history", {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const history = await response.json();
+      console.log("Fetched history:", history); // Add this line to log the response
+      const historyList = document.getElementById("historyList");
+      if (historyList && Array.isArray(history)) {
+        historyList.innerHTML = "";
+        history.forEach(item => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `${item.algorithm} - ${new Date(item.date).toLocaleString()}`;
+          historyList.appendChild(listItem);
+        });
+      } else {
+        console.error("History is not an array:", history);
+      }
+    } catch (error) {
+      console.error("Failed to fetch visualization history", error);
+    }
+  }
+
+  fetchHistory();
 });

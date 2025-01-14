@@ -1,4 +1,3 @@
-
 export function checkAuthStatus() {
   const token = localStorage.getItem("token");
   if (token) {

@@ -41,8 +41,8 @@ body {
 }
 
 .links {
-  left: 50%; /* Add this line */
-  transform: translateX(-50%); /* Add this line */
+  /* left: 50%; */
+  transform: translateX(-27%); 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -132,7 +132,6 @@ button.active {
 }
 
 canvas {
-  /* border-bottom: 2px solid var(--neon-blue); */
   display: flex;
   margin: 15px auto;
   padding: 0 5px;
@@ -286,17 +285,27 @@ dialog form button {
   margin: 0 10rem;
 }
 
-section {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
+section#features {
+  border: 2px solid var(--neon-blue);
+  display: inline-block;
+  text-align: center;
+  height: 300px;
+  min-width: 100px; 
+  padding: 2rem;
+  border-radius: 30px;
+  box-shadow: 0 0 20px 0 var(--neon-blue);
+  background-color: var(--secondary-dark);
+  margin-top: 5rem;
+}
+
+h2.features-title {
+  margin: 0;
 }
 
 .features-list {
   color: var(--secondary-white);
   font-size: 2rem;
-  list-style:inside;
+  list-style: inside;
 }
 
 #signInButton, #signUpButton, #logoutButton {
@@ -319,6 +328,72 @@ input#arraySize {
   opacity: 0.8;
   transition: opacity 0.2s;
   border-radius: 15px;
+}
+
+.history-container {
+  border: 2px solid var(--neon-blue);
+  display: inline-block;
+  text-align: center;
+  height: 300px;
+  min-width: 100px; 
+  padding: 2rem;
+  border-radius: 30px;
+  box-shadow: 0 0 20px 0 var(--neon-blue);
+  background-color: var(--secondary-dark);
+  /* overflow-y: auto;  */
+}
+
+.v-history {
+  margin: 0;
+}
+
+.list-line {
+  height: 2px;
+  width: auto;
+  margin: 1rem 0;
+  background-color: var(--primary-white);
+}
+
+ul#historyList {
+  font-size: 1.5rem;
+  list-style: decimal;
+  color: var(--secondary-white);
+  overflow-y: auto;
+}
+
+ul#historyList li {
+  margin-bottom: 1rem;
+}
+
+.change-username {
+  margin-bottom: 5rem;
+}
+
+.change-username input {
+  background: var(--secondary-dark);
+  border: 2px solid var(--secondary-white);
+  padding: 10px !important;
+  border-radius: 30px;
+  color: var(--secondary-white);
+  text-align: center;
+  font-size: 1rem;
+  margin-right: 10px !important;
+}
+
+.change-username input:focus {
+  border-color: var(--neon-blue); 
+  box-shadow: 0 0 10px var(--neon-blue); 
+  outline: none; 
+}
+
+#changeUsernameForm {
+  padding: 20px;
+}
+
+.username-button {
+  background-color: var(--secondary-dark);
+  scale: 1.1;
+  margin-left: 10px !important;
 }
 
 input#arraySize:hover {

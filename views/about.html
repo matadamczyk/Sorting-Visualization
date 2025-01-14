@@ -38,8 +38,9 @@
           We aim to help students and enthusiasts understand how different sorting techniques work through visual representation.
         </p>
       </section>
-      <section>
-        <h2>Features</h2>
+      <section id="features">
+        <h2 class="features-title">Features</h2>
+        <div class="list-line"></div>
         <ul class="features-list">
           <li>Visualize multiple sorting algorithms</li>
           <li>Step-by-step execution</li>
@@ -69,6 +70,28 @@
         ></a>
       </div>
     </footer>
+    <dialog id="signInDialog">
+      <form method="dialog">
+        <h3>Sign In</h3>
+        <label for="signInUsername">Username:</label>
+        <input type="text" id="signInUsername" name="username" required />
+        <label for="signInPassword">Password:</label>
+        <input type="password" id="signInPassword" name="password" required />
+        <button type="submit">Sign In</button>
+        <button type="button" id="closeSignInDialog">Cancel</button>
+      </form>
+    </dialog>
+    <dialog id="signUpDialog">
+      <form method="dialog">
+        <h3>Sign Up</h3>
+        <label for="signUpUsername">Username:</label>
+        <input type="text" id="signUpUsername" name="username" required />
+        <label for="signUpPassword">Password:</label>
+        <input type="password" id="signUpPassword" name="password" required />
+        <button type="submit">Sign Up</button>
+        <button type="button" id="closeSignUpDialog">Cancel</button>
+      </form>
+    </dialog>
     <script type="module" src="../public/js/app.js"></script>
     <script type="module">
       import { checkAuthStatus } from '../public/js/auth/checkAuth.js';
@@ -92,6 +115,7 @@
       document.getElementById("logoutButton").addEventListener("click", () => {
         localStorage.removeItem("token");
         location.reload();
+        location.href = "/";
       });
     </script>
   </body>
