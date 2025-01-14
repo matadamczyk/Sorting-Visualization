@@ -88,6 +88,17 @@ body {
   transform: scaleX(1);
 }
 
+.links a.active {
+  color: var(--neon-blue);
+}
+
+.sign {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
 button {
   margin: 5px;
   padding: 10px 20px;
@@ -268,6 +279,28 @@ dialog form button {
 
 .choose {
   background-color: var(--secondary-dark);
+}
+
+.description {
+  font-size: 2rem;
+  margin: 0 10rem;
+}
+
+section {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+}
+
+.features-list {
+  color: var(--secondary-white);
+  font-size: 2rem;
+  list-style:inside;
+}
+
+#signInButton, #signUpButton, #logoutButton {
+  font-size: 2rem;
 }
 
 .input-bar {

@@ -14,11 +14,85 @@
       href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Teko:wght@300..700&display=swap"
       rel="stylesheet"
     />
-    <title>Document</title>
+    <title>About</title>
   </head>
   <body>
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio nam
-    eius temporibus labore? Saepe obcaecati at iusto, atque ex doloribus quam,
-    itaque eos deleniti, doloremque voluptatum iure repellat corrupti tempora?
+    <nav class="navbar">
+      <h1>Sorting Visualizer</h1>
+      <div class="links">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/profile" id="profile" style="display: none">User profile</a>
+      </div>
+      <div class="sign">
+        <button id="signInButton">Sign in</button>
+        <button id="signUpButton">Sign up</button>
+        <button id="logoutButton" style="display: none">Logout</button>
+      </div>
+    </nav>
+    <main>
+      <section>
+        <h2>Our Mission</h2>
+        <p class="description">
+          Our mission is to provide an interactive and educational tool for visualizing various sorting algorithms. 
+          We aim to help students and enthusiasts understand how different sorting techniques work through visual representation.
+        </p>
+      </section>
+      <section>
+        <h2>Features</h2>
+        <ul class="features-list">
+          <li>Visualize multiple sorting algorithms</li>
+          <li>Step-by-step execution</li>
+          <li>Compare performance of algorithms</li>
+          <li>Interactive and user-friendly interface</li>
+        </ul>
+      </section>
+    </main>
+    <footer>
+      <div class="info">
+        <p class="copy-rights">
+          &copy; 2025 Sorting Visualization. All rights reserved.
+        </p>
+        <nav>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="repo">
+        <a
+          class="github"
+          href="http://github.com/matadamczyk/Sorting-Visualization"
+          >Github repository <i class="fa fa-github"></i
+        ></a>
+      </div>
+    </footer>
+    <script type="module" src="../public/js/app.js"></script>
+    <script type="module">
+      import { checkAuthStatus } from '../public/js/auth/checkAuth.js';
+      checkAuthStatus();
+    </script>
+    <script type="module">
+      document.querySelectorAll('.links a').forEach(link => {
+        if (link.href === window.location.href) {
+          link.classList.add('active');
+        }
+      });
+
+      document.getElementById("signInButton").addEventListener("click", () => {
+        document.getElementById("signInDialog").showModal();
+      });
+
+      document.getElementById("signUpButton").addEventListener("click", () => {
+        document.getElementById("signUpDialog").showModal();
+      });
+
+      document.getElementById("logoutButton").addEventListener("click", () => {
+        localStorage.removeItem("token");
+        location.reload();
+      });
+    </script>
   </body>
 </html>

@@ -21,6 +21,7 @@
     <nav class="navbar">
       <h1>Sorting Visualizer</h1>
       <div class="links">
+        <a href="/">Home</a>
         <a href="/about">About</a>
         <a href="/profile" id="profile" style="display: none">User profile</a>
       </div>
@@ -112,5 +113,9 @@
       </div>
     </footer>
     <script type="module" src="../public/js/app.js"></script>
+    <script type="module">
+      import { checkAuthStatus } from '../public/js/auth/checkAuth.js';
+      checkAuthStatus();
+    </script>
   </body>
 </html>
