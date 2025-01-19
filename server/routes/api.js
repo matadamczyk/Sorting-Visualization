@@ -61,11 +61,11 @@ router.get("/visualization-history", async (req, res) => {
   const token = authHeader.split(" ")[1];
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("Decoded token:", decoded); // Add this line to log the decoded token
+    console.log("Decoded token:", decoded); 
     const history = await VisualizationHistory.find({ user: decoded.id }).sort({ date: -1 });
     res.json({ history });
   } catch (error) {
-    console.error("Failed to fetch visualization history:", error); // Add this line to log the error
+    console.error("Failed to fetch visualization history:", error); 
     res.status(500).json({ error: "Failed to fetch visualization history" });
   }
 });
