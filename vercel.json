@@ -1,23 +1,9 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "server/server.js",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["server/**"]
-      }
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static",
-      "config": { "includeFiles": ["public/**"] }
-    },
-    {
-      "src": "views/**",
-      "use": "@vercel/static",
-      "config": { "includeFiles": ["views/**"] }
-    }
+    { "src": "server/**", "use": "@vercel/node" },
+    { "src": "public/**", "use": "@vercel/static" },
+    { "src": "views/**", "use": "@vercel/static" }
   ],
   "headers": [
     {
@@ -41,19 +27,5 @@
     { "source": "/about", "destination": "/views/about.html" },
     { "source": "/profile", "destination": "/views/profile.html" },
     { "source": "/(.*)", "destination": "/views/index.html" }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.)",
-      "dest": "server/server.js"
-    },
-    {
-      "src": "/auth/(.)",
-      "dest": "server/server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "server/server.js"
-    }
   ]
 }

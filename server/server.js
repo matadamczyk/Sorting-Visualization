@@ -41,8 +41,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/public", express.static("public"));
-app.use("/js", express.static("public", { extensions: ['js'] }));
+// app.use("/public", express.static("public"));
+app.use("/public", express.static("public", { extensions: ['js'] }));
 app.use("/views", express.static("views"));
 
 app.get("/", (req, res) => {
